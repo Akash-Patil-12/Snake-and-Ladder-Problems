@@ -9,25 +9,28 @@ namespace Snake_and_Ladder
         //variables
         int position = 0, dice, option;
         //constants
-        const int NO_PLAY = 0, LADDER = 1, SNAKE = 2, RESTART = 0, WIN = 100;
+        const int NO_PLAY = 0, LADDER = 1, SNAKE = 2, RESTART = 0, WIN = 100, START = 0;
         /// <summary>
-        /// Roll the dies till it reach 100 and add value according the option to position 
+        /// Roll the dies till it reach exact postion = 100  
         /// </summary>
         public void Start()
         {
-            while (position <= WIN)
+            Random random = new Random();
+            while (true)
             {
-                Random random = new Random();
+                if (position == WIN)
+                    break;
+                if (position < RESTART)
+                    position = START;
                 dice = random.Next(1, 7);
                 option = random.Next(0, 3);
-                if (position < RESTART)
-                    position = 0;
                 switch (option)
                 {
                     case NO_PLAY:
                         break;
                     case LADDER:
-                        position += dice;
+                        if ((position + dice) <= 100)
+                            position += dice;
                         break;
                     case SNAKE:
                         position -= dice;
@@ -35,8 +38,8 @@ namespace Snake_and_Ladder
                     default:
                         break;
                 }
+                Console.WriteLine("Postion :" + position);
             }
-            Console.WriteLine("Postion :" + position);
         }
     }
 }
