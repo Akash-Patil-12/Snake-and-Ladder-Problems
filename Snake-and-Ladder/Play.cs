@@ -9,10 +9,13 @@ namespace Snake_and_Ladder
         //variables
         int position = 0;
         /// <summary>
-        /// Display the position 
+        /// Roll the dies and add value to position 
         /// </summary>
         public void Start()
         {
+            Random random = new Random();
+            int dice = random.Next(1, 7);
+            position += dice;
             Console.WriteLine("Postion :" + position);
         }
     }
